@@ -113,7 +113,7 @@ def get_response(user_query):
     answer, docs = res['result'], res['source_documents']
     end = time.time()
 
-    return answer, docs, round(end - start, 2)
+    return answer
 
 # if __name__ == "__main__":
 #     main(user_query)
