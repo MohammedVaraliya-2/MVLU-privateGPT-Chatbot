@@ -29,7 +29,7 @@ if not load_dotenv():
     print("Could not load .env file or it is empty. Please check if it exists and is readable.")
     exit(1)
 
-from constants import CHROMA_SETTINGS
+from privateGPT.constants import CHROMA_SETTINGS
 import chromadb
 
 # Load environment variables

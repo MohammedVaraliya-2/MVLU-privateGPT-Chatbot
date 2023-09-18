@@ -85,5 +85,35 @@ def parse_arguments():
     return parser.parse_args()
 
 
+# Initialize the embeddings and Chroma database
+embeddings = HuggingFaceEmbeddings(model_name=embeddings_model_name)
+chroma_client = chromadb.PersistentClient(settings=CHROMA_SETTINGS, path=persist_directory)
+db = Chroma(persist_directory=persist_directory, embedding_function=embeddings, client_settings=CHROMA_SETTINGS,
+            client=chroma_client)
+retriever = db.as_retriever(search_kwargs={"k": target_source_chunks})
+
+# Define the function to create the RetrievalQA instance
+def create_qa_instance(model_type):
+    callbacks = []  # You can customize this based on your needs
+    if model_type == "LlamaCpp":
+        llm = LlamaCpp(model_path=model_path, max_tokens=model_n_ctx, n_batch=model_n_batch, callbacks=callbacks, verbose=False)
+    elif model_type == "GPT4All":
+        llm = GPT4All(model=model_path, max_tokens=model_n_ctx, backend='gptj', n_batch=model_n_batch, callbacks=callbacks, verbose=False)
+    else:
+        raise Exception(f"Model type {model_type} is not supported. Please choose one of the following: LlamaCpp, GPT4All")
+
+    return RetrievalQA.from_chain_type(llm=llm, chain_type="stuff", retriever=retriever,
+                                      return_source_documents=True)
+
+# Main function to get responses
+def get_response(user_query):
+    qa = create_qa_instance(model_type)
+    start = time.time()
+    res = qa(user_query)
+    answer, docs = res['result'], res['source_documents']
+    end = time.time()
+
+    return answer, docs, round(end - start, 2)
+
 # if __name__ == "__main__":
-#     main(query=)
+#     main(user_query)
