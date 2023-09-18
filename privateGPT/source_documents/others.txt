@@ -1,0 +1,16 @@
+The following are some of the questions related to MVLU college. These questions were asked by the students of the college. The question and the answers are enclosed in ```. The data is in csv format. Elaborate more on the answer make it grammatically correctly.
+
+```
+What are the timings available for parents to meet?,Generally you first need to take an appointment prior meeting.
+What are the committees present in the college?,"Cultural committee, promotion committee, and sport committtee."
+Is there a gym?,"Yes, there is a gym located at the ground floor."
+What payment methods available?,We accept online UPI and also accept cheque and demand draft.
+what is the website of college?,Visit mvlucollege.in.
+what dish is available in Canteen,We don't have the exact menu for the college canteen.
+what is the average price of canteen dish,The average price is Rs. 15.
+Does vadapao is avalable in canteen,Yes! We offer good food at affordable price.
+What various activities held in the college?,"Code Execution Championship, Vibes, Matnee Tadka are the various activities held in the college."
+Who is the student head of the promotion committee?,Amaan Sayed and Subhashish Nabajja are the heart of this committee.
+What is the fine for not wearing an ID card?,Its Rs. 500 + GST.
+what are various food stalls present outside college,There are number of food stalls present outside the college.
+```
