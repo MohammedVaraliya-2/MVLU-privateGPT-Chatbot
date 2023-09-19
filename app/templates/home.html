@@ -1,0 +1,51 @@
+{% extends 'main.html' %}
+
+
+{% block content %}
+
+<div class="container">
+    <div class="card">
+      <h3>Upload Files</h3>
+      <div class="drop_box">
+        <header>
+          <h4>Select File here</h4>
+        </header>
+        <p>Files Supported: .csv, .docx, .enex, .eml, .epub, .html, .md, .msg, .odt, .pdf, .pptx, .txt</p>
+        <input type="file" hidden accept=".csv, .docx, .enex, .eml, .epub, .html, .md, .msg, .odt, .pdf, .pptx, .txt" id="fileID" style="display:none;">
+        <button class="btn">Choose File</button>
+      </div>
+  
+    </div>
+</div>
+    
+{% endblock content %}
+
+{% block js %}
+<script>
+    const dropArea = document.querySelector(".drop_box"),
+    button = dropArea.querySelector("button"),
+    dragText = dropArea.querySelector("header"),
+    input = dropArea.querySelector("input");
+    let file;
+    var filename;
+
+    button.onclick = () => {
+    input.click();
+    };
+
+    input.addEventListener("change", function (e) {
+    var fileName = e.target.files[0].name;
+    let filedata = `
+        <form action="" method="post">
+            {% csrf_token %}
+            <div class="form">
+            <h4>${fileName}</h4>
+            {% comment %} <input type="email" placeholder="Enter email upload file"> {% endcomment %}
+            <button class="btn">Upload</button>
+            </div>
+        </form>`;
+    dropArea.innerHTML = filedata;
+    });
+</script>
+
+{% endblock js %}
